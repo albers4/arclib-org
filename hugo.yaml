@@ -1,0 +1,9 @@
+baseURL: "https://arclib.org/"
+locale: "en-us"
+title: "ARC | Applied Research & Computation"
+theme: "arclib-theme"
+
+params:
+    banner:
+        message: |
+            **Get Substrate**. Download binary release [here](/download).

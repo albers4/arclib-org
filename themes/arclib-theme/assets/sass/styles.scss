@@ -1,0 +1,11 @@
+@import "fonts";
+@import "utilities";
+@import "variables";
+@import "components/banner";
+
+body {
+  color: #111111;
+  font-family: "Inter", sans-serif;
+  line-height: 1.4;
+  margin: 0;
+}
