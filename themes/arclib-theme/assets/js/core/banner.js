@@ -5,7 +5,7 @@
 
     if (!banner || !closeBtn) return;
 
-    if (localStorage.getItem(storageKey) === "1") {
+    if (sessionStorage.getItem(storageKey) === "1") {
         banner.style.display = "none";
         return;
     }
@@ -13,6 +13,6 @@
     closeBtn.addEventListener("click", function(e) {
         e.preventDefault();
         banner.style.display = "none";
-        localStorage.setItem(storageKey, "1");
-    })
+        sessionStorage.setItem(storageKey, "1");
+    });
 })();
