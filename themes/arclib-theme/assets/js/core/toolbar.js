@@ -6,17 +6,19 @@
     const buttonList = document.querySelector(".arclib-toolbar-view-list");
     const buttonGrid = document.querySelector(".arclib-toolbar-view-grid");
 
-    if (params.get("display") == "grid") {
+    const isSection = grid && list && buttonList && buttonGrid;
+
+    if (params.get("display") == "grid" && isSection) {
         grid.classList.add("arclib-section-grid-show");
         list.classList.remove("arclib-section-list-show");
         buttonGrid.classList.add("arclib-btn-mute-active");
         buttonList.classList.remove("arclib-btn-mute-active");
-    } else if (params.get("display") == "list") {
+    } else if (params.get("display") == "list" && isSection) {
         grid.classList.remove("arclib-section-grid-show");
         list.classList.add("arclib-section-list-show");
         buttonGrid.classList.remove("arclib-btn-mute-active");
         buttonList.classList.add("arclib-btn-mute-active");
-    } else {
+    } else if (isSection) {
         grid.classList.add("arclib-section-grid-show");
         list.classList.remove("arclib-section-list-show");
         buttonGrid.classList.add("arclib-btn-mute-active");
