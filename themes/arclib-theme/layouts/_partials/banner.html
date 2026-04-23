@@ -1,8 +1,8 @@
 {{- if site.Params.banner }}
-<div class="arclib-banner">
+<div class="arclib-banner" id="arclib-banner">
     <div>
         {{- site.Params.banner.message | default "Getting started by downloading Subtrate." | .RenderString -}}
     </div>
-    {{- partial "utils/button" (dict "iconLeft" "x" "variant" "mute") -}}
+    {{- partial "utils/button" (dict "id" "arclib-banner-close" "iconLeft" "x" "variant" "mute") -}}
 </div>
 {{- end -}}
