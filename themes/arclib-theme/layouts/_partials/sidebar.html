@@ -1,0 +1,270 @@
+{{- $context := .context -}}
+
+{{- $navRoot := cond (eq site.Home.Type "docs") site.Home $context.FirstSection -}}
+{{- $pageURL := $context.RelPermalink -}}
+{{- $root := .root | default site.Home -}}
+
+<aside class="arclib-sidebar-container">
+    {{- if (site.Params.search.enable | default true) -}}
+        <div class="arclib-sidebar-search">{{- partial "search.html" . -}}</div>
+    {{- end -}}
+    <div class="arclib-sidebar-scrollbar">
+        <ul>
+            {{ template "sidebar-main" (dict "context" $root "pageURL" $pageURL "page" $context "toc" false) }}
+            {{ template "sidebar-footer" }}
+        </ul>
+    </div>
+</aside>
+
+<!------------------>
+<!-- Sidebar Main -->
+<!------------------>
+{{- define "sidebar-main" -}}
+    {{ template "sidebar-tree" (dict "context" .context "level" 0 "page" .page "pageURL" .pageURL "toc" (.toc | default false)) }}
+{{- end -}}
+
+<!------------------>
+<!-- Sidebar Tree -->
+<!------------------>
+{{- define "sidebar-tree" -}}
+    {{- if ge .level 4 -}}
+        {{- return -}}
+    {{- end -}}
+
+    {{- $context := .context -}}
+    {{- $page := .page -}}
+    {{- $pageURL := .page.RelPermalink -}}
+    {{- $level := .level -}}
+    {{- $toc := .toc | default false -}}
+    <!--{{- $useMainMenu := and (eq $level 0) $toc -}}-->
+    {{- $useMainMenu := false -}}
+    {{- $mainMenuEntries := slice -}}
+
+    {{- $items := slice -}}
+    {{- if $useMainMenu -}}
+        {{- range $menuItem := site.Menus.main -}}
+            {{- $menuType := $menuItem.Params.type | default "" -}}
+            {{- $menuTitle := or (T $menuItem.Identifier) $menuItem.Name -}}
+            {{- if $menuItem.HasChildren -}}
+                {{- $childEntries := slice -}}
+                {{- range $childItem = $menuItem.Children -}}
+                    {{- $childType := $childItem.Params.type | default "" -}}
+                    {{- $childTitle := or (T $childItem.Identifier) $childItem.Name -}}
+                    {{- with $childItem.Page -}}
+                        {{- if ne .Params.sidebar.exclude true -}}
+                            {{- $childEntries := $childEntries | append (dict "title" $childTitle "link" .RelPermalink) -}}
+                        {{- end -}}
+                        {{- continue -}}
+                    {{- end -}}
+
+                    {{- $childLink := $childItem.URL -}}
+                    {{- with $childItem.PageRef -}}
+                        {{- if hasPrefix . "/" -}}
+                            {{- $childLink = relLangURL (strings.TrimPrefix "/" .) -}}
+                        {{- end -}}
+                    {{- end -}}
+                    {{- if $childLink -}}
+                        {{- $childEntries = $childEntries | append (dict "title" $childTitle "link" $childLink) -}}
+                    {{- end -}}
+                {{- end -}}
+
+                {{- if gt (len $childEntries) 0 -}}
+                    {{- $mainMenuEntries = $mainMenuEntries | append (dict "type" "group" "title" $menuTitle "children" $childEntries) -}}
+                {{- end -}}
+                {{- continue -}}
+            {{- end -}}
+
+            {{- with $menuItem.Page -}}
+                {{- if ne .Params.sidebar.exclude true -}}
+                    {{- $mainMenuEntries = $mainMenuEntries | append (dict "type" "page" "item" . "title" $menuTitle) -}}
+                {{- end -}}
+                {{- continue -}}
+            {{- end -}}
+
+            {{- $link := $menuItem.URL -}}
+            {{- with $menuItem.PageRef -}}
+                {{- if hasPrefix . "/" -}}
+                    {{- $link = relLangURL (strings.TrimPrefix "/" .) -}}
+                {{- end -}}
+            {{- end -}}
+
+            {{- if $link -}}
+                {{- $mainMenuEntries = $mainMenuEntries | append (dict "type" "url" "link" $link "title" $menuTitle) -}}
+            {{- end -}}
+        {{- end -}}
+    {{- else -}}
+        {{- $items = where (union .context.RegularPages .context.Sections) "Params.sidebar.exclude" "!=" true -}}
+    {{- end -}}
+
+    {{- $hasItems := gt (len $items) 0 -}}
+    {{- if $useMainMenu -}}
+        {{- $hasItems = gt (len $mainMenuEntries) 0 -}}
+    {{- end -}}
+
+    {{- if $hasItems -}}
+        {{- if eq $level 0 -}}
+            {{- if $useMainMenu -}}
+                {{- range $entry := $mainMenuEntries -}}
+                    {{- if eq (index $entry "type") "page" -}}
+                        {{- $item := index $entry "item" -}}
+                        {{- if $item.Params.sidebar.seperator -}}
+                            <li class="arclib-sidebar-seperator">
+                                <span>{{ index $entry "title" }}</span>
+                            </li>
+                        {{- else }}
+                            {{- $active := eq (strings.TrimSuffix "/" $pageURL) (strings.TrimSuffix "/" $item.RelPermalink) -}}
+                            {{- $shouldOpen := or ($item.Params.sidebar.open) ($item.IsAncestor $page) $active | default true -}}
+                            <li class="{{ if $shouldOpen }}arclib-sidebar-open{{ end }}">
+                                {{- template "sidebar-item-link" (dict "context" $item "active" $active "open" $shouldOpen "title" (index $entry "title") "link" $item.RelPermalink) -}}
+                                {{- if and $toc $active (ne $item.Params.toc false) -}}
+                                    {{- template "sidebar-toc" (dict "page" $item) -}}
+                                {{- end -}}
+                                {{- template "sidebar-tree" (dict "context" $item "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc) -}}
+                            </li>
+                        {{- end -}}
+                    {{- else if eq (index $entry "type") "group" -}}
+                            <li class="arclib-sidebar-open">
+                                <div class="arclib-sidebar-item">
+                                    <span>
+                                        {{- index $entry "title" -}}
+                                    </span>
+                                </div>
+                                <div class="arclib-sidebar-children">
+                                    <ul>
+                                        {{- range $child := index $entry "children" -}}
+                                            {{- $link := index $child "link" -}}
+                                            {{- $active := eq (strings.TrimSuffix "/" $pageURL) (strings.TrimSuffix "/" $link) -}}
+                                            <li>
+                                                {{- template "sidebar-item-link" (dict "active" $active "open" false "title" (index $child "title") "link" $link) -}}
+                                            </li>
+                                        {{- end -}}
+                                    </ul>
+                                </div>
+                            </li>
+                    {{- else -}}
+                        {{- $link := index $entry "link" -}}
+                        {{- $active := eq (strings.TrimSuffix "/" $pageURL) (strings.TrimSuffix "/" $link) -}}
+                        <li>{{- template "sidebar-item-link" (dict "active" $active "open" false "title" (index $entry "title") "link" $link) -}}</li>
+                    {{- end -}}
+                {{- end -}}
+            {{- else -}}
+                {{- range $items.ByWeight -}}
+                    {{- if .Params.sidebar.seperator -}}
+                        <li class="arclib-sidebar-seperator">
+                            <span>{{ partial "utils/title.html" . }}</span>
+                        </li>
+                    {{- else -}}
+                        {{- $active := eq $pageURL .RelPermalink -}}
+                        {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true -}}
+                        <li class="{{ if $shouldOpen }}arclib-sidebar-open{{ end }}">
+                            {{- $linkTitle := partial "utils/title.html" . -}}
+                            {{- template "sidebar-item-link" (dict "context" . "active" $active "open" $shouldOpen "title" $linkTitle "link" .RelPermalink) }}
+                            {{- if and $toc $active (ne .Params.toc false) -}}
+                                {{- template "sidebar-toc" (dict "page" .) -}}
+                            {{- end -}}
+                            {{- template "sidebar-tree" (dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc) -}}
+                        </li>
+                    {{- end -}}
+                {{- end -}}
+            {{- end -}}
+        {{- else -}}
+            <div class="arclib-sidebar-children">
+                <ul>
+                    {{- range $items.ByWeight -}}
+                        {{- if .Params.sidebar.seperator -}}
+                            <li class="arclib-sidebar-seperator">
+                                <span>{{ partial "utils/title.html" . }}</span>
+                            </li>
+                        {{- else -}}
+                            {{- $active := eq $pageURL .RelPermalink -}}
+                            {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true -}}
+                            {{- $linkTitle := partial "utils/title.html" . -}}
+                            <li class="{{ if $shouldOpen }}arclib-sidebar-open{{ end }}">
+                                {{- template "sidebar-item-link" (dict "context" . "active" $active "open" $shouldOpen "title" $linkTitle "link" .RelPermalink) -}}
+                                {{- if and $toc $active (ne .Params.toc false) -}}
+                                    {{- template "sidebar-toc" (dict "page" .) -}}
+                                {{- end -}}
+                                {{- template "sidebar-tree" (dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc) -}}
+                            </li>
+                        {{- end -}}
+                    {{- end -}}
+                </ul>
+            </div>
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+<!----------------->
+<!-- Sidebar TOC -->
+<!----------------->
+{{- define "sidebar-toc" -}}
+    {{- $page := .page -}}
+    {{- with $page.Fragments.Headings -}}
+        <ul>
+            {{- range . -}}
+                {{- with .Headings -}}
+                    {{- range . -}}
+                        <li>
+                            <a
+                                href="#{{ anchorize .ID }}"
+                            >
+                                {{- .Title | safeHTML | plainify | htmlUnescape -}}
+                            </a>
+                        </li>
+                    {{- end -}}
+                {{- end -}}
+            {{- end -}}
+        </ul>
+    {{- end -}}
+{{- end -}}
+
+<!------------>
+<!-- Footer -->
+<!------------>
+{{- define "sidebar-footer" -}}
+    {{- range site.Menus.sidebar -}}
+        {{- $name := or (T .Identifier) .Name -}}
+        {{ if eq .Params.type "seperator" }}
+            <li class="arclib-sidebar-seperator">
+                <span>{{ $name }}</span>
+            </li>
+        {{ else }}
+            {{- $link := .URL -}}
+            {{- with .PageRef -}}
+                {{- if hasPrefix . "/" -}}
+                    {{ $link = relLangURL (strings.TrimPrefi "/" .) -}}
+                {{- end -}}
+            {{- end -}}
+            <li>{{ template "sidebar-item-link" (dict "active" false "open" false "title" $name "link" $link) }}</li>
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+<!----------------------->
+<!-- Sidebar Item Link -->
+<!----------------------->
+{{- define "sidebar-item-link" -}}
+    {{- $external := strings.HasPrefix .link "http" -}}
+    {{- $open := .open | default true -}}
+    {{- $hasChildren := false -}}
+    {{- with .context -}}{{ if or .RegularPages .Sections }}{{ $hasChildren = true }}{{- end -}}{{- end -}}
+    <div class="arclib-sidebar-item {{ if .active }}arclib-sidebar-active{{ end }}">
+        <a
+            href="{{ .link }}"
+            {{ if $external }}target="_blank" rel="noopener noreferrer"{{ end }}>
+            <span>{{- .title -}}</span>
+        </a>
+        {{- if $hasChildren -}}
+            <button data-sidebar-toggle type="button">
+                {{ template "sidebar-collapsible-button" }}
+            </button>
+        {{- end -}}
+    </div>
+{{- end -}}
+
+<!-------------------------------->
+<!-- Sidebar Collapsible Button -->
+<!-------------------------------->
+{{- define "sidebar-collapsible-button" -}}
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+{{- end -}}

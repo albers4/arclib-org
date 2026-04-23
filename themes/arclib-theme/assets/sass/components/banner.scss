@@ -1,3 +1,30 @@
 .arclib-banner {
-    text-decoration: underline;
+    display: flex;
+    background-color: var(--gray-400);
+    color: white;
+    width: 100%;
+    position: relative;
+    padding: 4px 0;
+
+    > div:first-child {
+        font-size: 14px;
+        margin: 0 auto;
+        align-content: center;
+        white-space: pre-wrap
+    }
+
+    > button {
+        position: relative;
+        right: 4px;
+        margin: auto 0;
+
+        border-radius: 6px;
+        width: 1rem;
+        aspect-ratio: 1;
+        color: white;
+    }
+
+    a {
+        color: white;
+    }
 }

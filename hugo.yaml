@@ -4,6 +4,49 @@ title: "ARC | Applied Research & Computation"
 theme: "arclib-theme"
 
 params:
-    banner:
-        message: |
-            **Get Substrate**. Download binary release [here](/download).
+  banner:
+    message: |
+      **Substrate** v0.1.0 is released. Download the latest release [here](/products/substrate).
+
+menu:
+  main:
+    - identifier: documentation
+      name: Documentation
+      pageRef: /docs
+      weight: 1
+    - identifier: blog
+      name: Blog
+      pageRef: /blog
+      weight: 2
+    - identifier: showcase
+      name: Stories
+      pageRef: /stories
+      weight: 3
+    - name: Search
+      weight: 4
+      params:
+        type: search
+  sidebar:
+    - name: "Resources"
+      params:
+        type: "seperator"
+      weight: 1
+    - name: "GitHub"
+      url: "https://github.com/albers4"
+      weight: 2
+    - name: "Community"
+      url: "https://github.com/albers4"
+      weight: 3
+
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - ["$$", "$$"]
+            - ["\\[", "\\]"]
+          inline:
+            - ["$", "$"]
+            - ["\\(", "\\)"]

@@ -1,0 +1,56 @@
+{{- $text := .text -}}
+{{- $href := .href | default "" -}}
+{{- $variant := .variant | default "normal" -}}
+{{- $class := .class | default "" -}}
+{{- $id := .id | default "" -}}
+{{- $iconLeft := .iconLeft | default "" -}}
+{{- $iconRight := .iconRight | default "" -}}
+{{- $external := .external | default false -}}
+{{- $type := .type | default "button" -}}
+
+{{- $isLink := ne $href "" -}}
+{{- $baseClass := printf "arclib-btn arclib-btn-%s %s" $variant $class -}}
+
+{{- define "btn-inner" -}}
+    {{- if .iconLeft -}}
+        <span class="arclib-btn-icon arclib-btn-icon-left">
+            {{- partial "utils/icon.html" (dict "name" .iconLeft "attributes" "height=1.2em width=1.2em") -}}
+        </span>
+    {{- end -}}
+    {{- if .text -}}<span class="arclib-btn-text">{{ .text }}</span>{{- end -}}
+    {{- if .iconRight -}}
+        <span class="arclib-btn-icon arclib-btn-icon-right">
+            {{- partial "utils/icon.html" (dict "name" .iconRight "attributes" "height=1.2em width=1.2em") -}}
+        </span>
+    {{- end -}}
+{{- end -}}
+
+{{- if $isLink -}}
+    <a
+        class="{{ $baseClass }}"
+        {{ if $id }}id="{{ $id }}"{{ end }}
+        href="{{ if strings.HasPrefix $href "?" }}{{ $href }}{{ else }}{{ $href | relURL }}{{ end }}"
+        {{ if strings.HasPrefix $href "?" }}
+            {{- $params := replaceRE `^\?` "" $href -}}
+            {{- range split $params "&" -}}
+                {{- $parts := split . "=" -}}
+                {{- if eq (len $parts) 2 -}}
+                    data-query-key="{{ index $parts 0 }}" data-query-value="{{ index $parts 1 }}"
+                {{- end -}}
+            {{- end -}}
+        {{ end }}
+        {{ if $external }}target="_blank" rel="noopener noreferrer"{{ end }}
+        {{ with .attributes }}{{ . | safeHTMLAttr }}{{ end }}
+    >
+        {{- template "btn-inner" . -}}
+    </a>
+{{- else -}}
+    <button 
+        class="{{ $baseClass }}"
+        {{ if $id }}id="{{ $id }}"{{ end }}
+        type="{{ $type }}"
+        {{ with .attributes }}{{ . | safeHTMLAttr }}{{ end }}
+    >
+        {{- template "btn-inner" . -}}
+    </button>
+{{- end -}}

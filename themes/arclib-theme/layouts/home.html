@@ -1,9 +1,8 @@
 {{ define "main" }}
-  {{ .Content }}
-  {{ range site.RegularPages }}
-    <section>
-      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-      {{ .Summary }}
-    </section>
-  {{ end }}
+<main class="arclib-home">
+    <h1>{{ .Title }}</h1>
+    <h3>{{ .Summary }}</h3>
+    {{- partial "utils/button.html" (dict "text" "Getting started" "href" "/docs" "variant" "highlight") -}}
+    <h4>{{ .ContentWithoutSummary }}</h4>
+</main>
 {{ end }}

@@ -1,10 +1,65 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <section>
-      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-      {{ .Summary }}
-    </section>
-  {{ end }}
+<div class="arclib-section-wrapper">
+  <br>
+  <br>
+  <h2>{{ .Title }}</h2>
+  <div class="arclib-section-description">
+    <h4>{{ .Content }}</h4>
+  </div>
+  <br>
+  {{- partial "toolbar.html" . -}}
+  <br>
+  <div class="arclib-section-grid">
+    {{ range .Pages }}
+      <article
+        class="arclib-section-card {{ if .Params.featured }}arclib-section-card-featured{{ end }}"
+        data-tags="{{ with .Params.tags }}{{ delimit . "," }}{{ end }}"
+        data-date="{{ .Date.Unix }}"
+        data-title="{{ .Title | lower }}"
+        >
+        <div class="arclib-section-card-image">
+          {{ with .Params.image }}<img src="{{ . | relURL }}" alt="">{{ end }}
+        </div>
+        <div class="arclib-section-card-meta">
+          <span class="arclib-section-card-category">
+            {{ with .Params.tags }}{{ index . 0 | humanize }}{{ else }}Post{{ end }}
+          </span>
+          {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+          {{ $dateHuman := .Date | time.Format ":date_long" }}
+          <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+        </div>
+        <a href="{{ .RelPermalink }}">
+          <h2 class="arclib-section-card-title">{{ .Title }}</h2>
+        </a>
+        {{ if .Params.featured }}
+          <div class="arclib-section-card-summary">{{ .Summary | plainify }}</div>
+        {{ end }}
+      </article>
+    {{ end }}
+  </div>
+  <div class="arclib-section-list">
+    {{ range .Pages }}
+      <article
+        data-tags="{{ with .Params.tags }}{{ delimit . "," }}{{ end }}"
+        data-date="{{ .Date.Unix }}"
+        data-title="{{ .Title | lower }}"
+        >
+        <div class="arclib-section-left">
+          <h4>
+            {{ with .Params.tags }}{{ index . 0 | humanize }}{{ else }}Post{{ end }}
+          </h4>
+          {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+          {{ $dateHuman := .Date | time.Format ":date_long" }}
+          <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+        </div>
+        <div class="arclib-section-right">
+          <a href="{{ .RelPermalink }}">
+            <h2 class="arclib-section-card-title">{{ .LinkTitle }}</h2>
+          </a>
+          <h4>{{- .Summary -}}</h4>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+</div>
 {{ end }}

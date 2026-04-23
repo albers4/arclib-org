@@ -1,0 +1,47 @@
+@use "sass:color";
+
+$white-base: white;
+$gray-base: #1e1e1e;
+$blue-base: #008CFF;
+$orange-base: #fb9632;
+
+:root {
+    --white-500: #{$white-base};
+    --white-600: #{color.scale($white-base, $lightness: -10%)};
+    --white-700: #{color.scale($white-base, $lightness: -20%)};
+    --white-800: #{color.scale($white-base, $lightness: -30%)};
+    --white-900: #{color.scale($white-base, $lightness: -45%)};
+
+    --gray-50:  #{color.scale($gray-base, $lightness: +45%)};
+    --gray-100: #{color.scale($gray-base, $lightness: +30%)};
+    --gray-200: #{color.scale($gray-base, $lightness: +15%)};
+    --gray-300: #{color.scale($gray-base, $lightness: +10%)};
+    --gray-400: #{color.scale($gray-base, $lightness: +5%)};
+    --gray-500: #{$gray-base};
+    --gray-600: #{color.scale($gray-base, $lightness: -10%)};
+    --gray-700: #{color.scale($gray-base, $lightness: -20%)};
+    --gray-800: #{color.scale($gray-base, $lightness: -30%)};
+    --gray-900: #{color.scale($gray-base, $lightness: -45%)};
+
+    --blue-50:  #{color.scale($blue-base, $lightness: +45%)};
+    --blue-100: #{color.scale($blue-base, $lightness: +30%)};
+    --blue-200: #{color.scale($blue-base, $lightness: +15%)};
+    --blue-300: #{color.scale($blue-base, $lightness: +10%)};
+    --blue-400: #{color.scale($blue-base, $lightness: +5%)};
+    --blue-500: #{$blue-base};
+    --blue-600: #{color.scale($blue-base, $lightness: -10%)};
+    --blue-700: #{color.scale($blue-base, $lightness: -20%)};
+    --blue-800: #{color.scale($blue-base, $lightness: -30%)};
+    --blue-900: #{color.scale($blue-base, $lightness: -45%)};
+
+    --orange-50:  #{color.scale($orange-base, $lightness: +45%)};
+    --orange-100: #{color.scale($orange-base, $lightness: +30%)};
+    --orange-200: #{color.scale($orange-base, $lightness: +15%)};
+    --orange-300: #{color.scale($orange-base, $lightness: +10%)};
+    --orange-400: #{color.scale($orange-base, $lightness: +5%)};
+    --orange-500: #{$orange-base};
+    --orange-600: #{color.scale($orange-base, $lightness: -10%)};
+    --orange-700: #{color.scale($orange-base, $lightness: -20%)};
+    --orange-800: #{color.scale($orange-base, $lightness: -30%)};
+    --orange-900: #{color.scale($orange-base, $lightness: -45%)};
+}

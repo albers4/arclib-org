@@ -1,0 +1,50 @@
+.arclib-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.arclib-dropdown-menu {
+    position: absolute;
+    top: calc(100% + .25rem);
+    z-index: 100;
+    list-style: none;
+    padding: 6px 0;
+    margin: 0;
+    display: none;
+    background-color: var(--color-dropdown-bg);
+    border-radius: 6px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+}
+
+.arclib-dropdown.is-open .arclib-dropdown-menu {
+    display: block;
+}
+
+.arclib-dropdown-left .arclib-dropdown-menu { left: 0; }
+.arclib-dropdown-right .arclib-dropdown-menu { right: 0; }
+
+.arclib-dropdown-item a,
+.arclib-dropdown-btn {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 0.25rem 0.75rem;
+}
+
+.arclib-dropdown-item a:hover,
+.arclib-dropdown-btn:hover {
+    background-color: var(--color-dropdown-hover);
+}
+
+.arclib-dropdown-header {
+}
+
+.arclib-dropdown-divider {
+    height: 1px;
+    margin: 4px 0;
+    background-color: var(--color-dropdown-divider);
+}

@@ -1,5 +1,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
+<link rel="icon" type="image/svg+xml" href="{{ `favicon.svg` | relURL }}">
+<script>
+    (function() {
+        const savedTheme = localStorage.getItem("color-theme") || "system";
+        const isDark = savedTheme === "dark" || (savedTheme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (isDark) document.documentElement.classList.add("dark");
+    })();
+</script>
 {{ partialCached "head/sass.html" . }}
 {{ partialCached "head/js.html" . }}
+{{ partial "head/math.html" . }}

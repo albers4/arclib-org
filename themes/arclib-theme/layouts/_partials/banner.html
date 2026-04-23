@@ -1,9 +1,8 @@
 {{- if site.Params.banner }}
-<div class="arclib-banner al-sticky al-w-full" style="background-color: red;">
+<div class="arclib-banner">
     <div>
-        <div style="white-space: pre-wrap">
-            {{- site.Params.banner.message | default "Getting started by downloading Subtrate." | .RenderString -}}
-        </div>
+        {{- site.Params.banner.message | default "Getting started by downloading Subtrate." | .RenderString -}}
     </div>
+    {{- partial "utils/button" (dict "iconLeft" "x" "variant" "mute") -}}
 </div>
 {{- end -}}

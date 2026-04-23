@@ -1,0 +1,13 @@
+{{ define "main" }}
+<div class="arclib-product-wrapper">
+  <div class="arclib-product-icon">
+    <img src="{{ `images/substrate-logo.png` | relURL }}" alt="substrate-logo" height="80" width="80" />
+  </div>
+  <h2>{{ .Title }}</h2>
+  <h3>The Operating System for<br>Physical Reality</h3>
+  {{- partial "utils/button.html" (dict "text" "Download" "variant" "highlight") -}}
+  <div style="margin-top: .5rem; font-size: 12px; opacity: 0.4;">.deb package (64 bit)</div>
+  <br>
+  {{ .Content }}
+</div>
+{{ end }}

@@ -1,0 +1,97 @@
+.arclib-section-wrapper {
+    min-height: 100vh;
+    max-width: 90rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10rem;
+
+    a {
+        text-underline-offset: .25rem;
+        text-decoration: none;
+    }
+}
+
+.arclib-section-description {
+    max-width: 30rem;
+}
+
+.arclib-section-list > article {
+    display: grid;
+    grid-template-columns: 20rem auto;
+    padding: 2rem 0;
+
+    border-bottom: 1px solid var(--color-hr);
+}
+
+.arclib-section-list{
+    display: none;
+
+    &-show {
+        display: block;
+    }
+}
+
+.arclib-section-grid {
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem 1.5rem;
+
+    .arclib-section-card-featured {
+        grid-column: span 2;
+        grid-row: span 2;
+
+        .arclib-section-card-title {
+            font-size: 2.5rem;
+        }
+        .arclib-section-card-image { aspect-ratio: 16 / 10; }
+    }
+
+    &-show {
+        display: grid;
+    }
+}
+
+.arclib-section-card {
+    a { 
+        text-decoration: none; 
+        color: inherit; 
+        display: block; 
+    }
+
+    &-image {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        background-color: var(--color-section-card-bg);
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 1.25rem;
+        img { width: 100%; height: 100%; object-fit: cover; }
+    }
+
+    &-meta {
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        gap: 0.75rem;
+        font-weight: 400;
+    }
+
+    &-title {
+        font-size: 2rem;
+        font-family: "Inter";
+        line-height: 1.1;
+        margin: 0;
+        letter-spacing: -0.02em;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &-summary {
+        font-size: 1rem;
+        line-height: 1.4;
+        margin-top: 1rem;
+        opacity: 0.8;
+    }
+}

@@ -1,0 +1,90 @@
+.arclib-sidebar-item a,
+.arclib-sidebar-children a,
+.arclib-sidebar-item span {
+    font-size: 13px;
+}
+
+.arclib-sidebar-container {
+    position: sticky;
+    top: 66px;
+    left: 0;
+    width: 15rem;
+    height: calc(100vh - 66px);
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.arclib-sidebar-scrollbar {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: .2rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.arclib-sidebar-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px;
+    padding: .25rem .5rem;
+
+    &:hover {
+        background-color: var(--color-sidebar-item-bg);
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        flex: 1;
+    }
+
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        transition: transform 0.2s;
+
+        svg { width: .8rem; height: .8rem; }
+    }
+}
+
+.arclib-sidebar-open > .arclib-sidebar-item button {
+    transform: rotate(90deg);
+}
+
+.arclib-sidebar-children {
+    display: none;
+    padding-left: .5rem;
+    margin-top: 0.2rem;
+
+    .arclib-sidebar-open > & { display: block; }
+}
+
+.arclib-sidebar-seperator span {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 1rem 0.5rem 0.5rem;
+    opacity: 0.4;
+}
+
+.arclib-sidebar-search {
+    margin-bottom: .5rem;
+}
+
+.arclib-sidebar-active {
+    background-color: var(--color-sidebar-item-bg);
+}

@@ -1,0 +1,18 @@
+{{- $currentPage := .currentPage -}}
+{{- $link := .link -}}
+{{- $item := .item -}}
+{{- $external := .external -}}
+
+{{- $active := or ($currentPage.IsMenuCurrent "main" $item) ($currentPage.HasMenuCurrent "main" $item) -}}
+
+{{- if not $active -}}
+    {{- $active = eq $currentPage.RelPermalink ($link | relURL) -}}
+{{- end -}}
+
+<a
+    class="arclib-nav-link {{ if $active }}arclib-nav-link-active{{ end }}"
+    title="{{- or (T .Identifier) .Name | safeHTML -}}"
+    href="{{- $link | relURL -}}"
+    {{- if $external -}}target="_blank" rel="noopener noreferrer"{{- end -}}>
+    <span>{{- or (T $item.Identifier) $item.Name | safeHTML -}}</span>
+</a>

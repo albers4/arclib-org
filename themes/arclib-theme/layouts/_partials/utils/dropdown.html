@@ -1,0 +1,39 @@
+{{- $id := .id | default (printf "dropdown-%d" (now.UnixNano)) -}}
+{{- $align := .align | default "left" -}}
+{{- $items := .items -}}
+{{- $class := .class | default "" -}}
+
+{{- $trigger := .trigger -}}
+{{- $triggerAttr := $trigger.attributes | default "" -}}
+{{- $trigger = merge $trigger (dict "attributes" (printf "%s data-dropdown-toggle" $triggerAttr)) -}}
+
+<div class="arclib-dropdown arclib-dropdown-{{ $align }} {{ $class }}" id="{{ $id }}">
+    {{- partial "utils/button.html" $trigger -}}
+    <ul class="arclib-dropdown-menu">
+        {{ range $items }}
+            {{ if eq .type "divider" }}
+                <li class="arclib-dropdown-divider"></li>
+            {{ else if eq .type "header" }}
+                <li class="arclib-dropdown-header">{{ .text }}</li>
+            {{ else }}
+                <li class="arclib-dropdown-item">
+                    {{ if .href }}
+                    {{- $href := .href | default "" -}}
+                    {{- $isQuery := strings.HasPrefix $href "?" -}}
+                        <a href="{{ if $isQuery }}{{ $href }}{{ else }}{{ $href | relURL }}{{ end }}"
+                        {{ if $isQuery }}data-query-key="{{ replaceRE `^\?(\w+)=.*` "$1" $href }}" data-query-value="{{ replaceRE `^\?.*=(\w+)` "$1" $href }}"{{ end }}
+                        {{ if .external }}target="_blank" rel="noopener noreferrer"{{ end }}>
+                            {{ if .icon }}{{ partial "utils/icon.html" (dict "name" .icon ) }}{{ end }}
+                            <span>{{ .text }}</span>
+                        </a>
+                    {{ else }}
+                        <button type="button" class="arclib-dropdown-btn" {{ with .action }}onclick="{{ . | safeJS }}"{{ end }}>
+                            {{ if .icon }}{{ partial "utils/icon.html" (dict "name" .icon) }}{{ end }}
+                            <span>{{ .text }}</span>
+                        </button>
+                    {{ end }}
+                </li>
+            {{ end }}
+        {{ end }} 
+    </ul>
+</div>

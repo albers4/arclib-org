@@ -1,11 +1,106 @@
-@import "fonts";
-@import "utilities";
-@import "variables";
-@import "components/banner";
+@forward "colors";
+@forward "fonts";
+@forward "utilities";
+@forward "variables";
+@forward "components/button";
+@forward "components/dropdown";
+@forward "components/banner";
+@forward "components/navbar";
+@forward "components/search";
+@forward "components/footer";
+@forward "components/toolbar";
+@forward "components/toc";
+@forward "components/sidebar";
+@forward "404";
+@forward "page";
+@forward "section";
+@forward "home";
+@forward "product";
+@forward "documentation";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: 66px;
+  scroll-behavior: smooth;
+}
 
 body {
-  color: #111111;
+  overflow-x: hidden;
+  width: 100%;
+
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-family: "Inter", sans-serif;
   line-height: 1.4;
   margin: 0;
+}
+
+h1 {
+  font-family: "InstrumentSerif";
+  font-weight: 400;
+  font-size: 64px;
+  margin: 0;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-family: "InstrumentSerif";
+  font-weight: 400;
+  font-size: 42px;
+  margin: 0;
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  font-family: "Inter";
+  font-size: 28px;
+  font-weight: 300;
+  margin: 0;
+  margin-bottom: 1.5rem;
+}
+
+h4 {
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 400;
+}
+
+p {
+  line-height: 1.6;
+}
+
+a {
+  color: var(--color-text);
+}
+
+time {
+  font-size: 14px;
+  opacity: .5;
+}
+
+main {
+  min-height: 100vh;
+}
+
+hr {
+  border-color: var(--color-hr);
+  border-top: none;
+  opacity: .5;
+}
+
+kbd {
+  position: absolute;
+  user-select: none;
+  pointer-events: none;
+  right: 6px;
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: 5px;
+  background-color: var(--color-bg);
+  color: var(--color-kbd-text);
+  border: 1px solid var(--color-kbd-border);
+  font-family: monospace;
 }

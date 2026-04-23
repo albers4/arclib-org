@@ -1,0 +1,39 @@
+<nav class="arclib-toolbar">
+        <div class="arclib-toolbar-left">
+        {{- $section := .FirstSection -}}
+        
+        <!-- "All" Link -->
+        <a data-query-key="tag" data-query-value="all"
+           class="arclib-toolbar-link arclib-toolbar-link-active">
+           All
+        </a>
+
+        <!-- Tag Links -->
+        {{- $tags := slice -}}
+        {{- range $section.RegularPages -}}
+            {{- with .Params.tags -}}{{ $tags = $tags | append . }}{{- end -}}
+        {{- end -}}
+
+        {{- range (uniq $tags | sort) -}}
+            <a data-query-key="tag" data-query-value="{{ . | urlize }}"
+               class="arclib-toolbar-link arclib-toolbar-link-active">
+                {{ . | humanize }}
+            </a>
+        {{- end -}}
+    </div>
+    <div class="arclib-toolbar-right">
+        {{- partial "utils/dropdown.html" (dict
+            "align" "right" 
+            "trigger" (dict "text" "Sort" "iconRight" "chevron-down")
+            "items" (slice
+                (dict "text" "Newest First" "href" "?sort=desc")
+                (dict "text" "Oldest First" "href" "?sort=asc")
+                (dict "type" "divider")
+                (dict "text" "Alphabetic (A-Z)" "href" "?sort=az")
+                (dict "text" "Alphabetic (Z-A)" "href" "?sort=za")
+            ))
+        -}}
+        {{- partial "utils/button.html" (dict "href" "?display=list" "iconLeft" "view-list" "variant" "mute" "class" "arclib-toolbar-view-list") -}}
+        {{- partial "utils/button.html" (dict "href" "?display=grid" "iconLeft" "view-grid" "variant" "mute" "class" "arclib-toolbar-view-grid") -}}
+    </div>
+</nav>

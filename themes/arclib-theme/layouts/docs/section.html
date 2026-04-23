@@ -1,0 +1,12 @@
+{{ define "main" }}
+<div class="arclib-documentation-wrapper">
+  {{- partial "sidebar.html" (dict "context" . "root" .FirstSection) -}}
+  <div class="arclib-documentation-container">
+    <br>
+    <br>
+    <h2>{{- .Title -}}</h2>
+    {{- .Content -}}
+  </div>
+  {{- partial "toc.html" . -}}
+</div>
+{{ end }}

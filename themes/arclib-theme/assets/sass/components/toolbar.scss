@@ -1,0 +1,37 @@
+.arclib-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.arclib-toolbar-left,
+.arclib-toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.arclib-toolbar-right {
+    gap: 1rem;
+}
+
+.arclib-toolbar-link {
+    text-decoration: none;
+    opacity: .6;
+    font-size: 20px;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.arclib-toolbar .active {
+    opacity: 1;
+}
+
+.arclib-toolbar-view-list,
+.arclib-toolbar-view-grid {
+    border-radius: 6px;
+    width: 1rem;
+    aspect-ratio: 1;
+}

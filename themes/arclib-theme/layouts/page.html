@@ -1,7 +1,18 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-
+<div class="arclib-page-wrapper">
+  <br>
+  <br>
+  <br>
   {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
   {{ $dateHuman := .Date | time.Format ":date_long" }}
   <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+  <h1>{{ .Title }}</h1>
+  <h4>As AI systems become more capable and widely used, we need a clear public framework for how they should behave.</h4>
+  <br>
+  <hr>
+  <br>
+  <div class="arclib-page-narrow">
+    {{ .Content }}
+  </div>
+</div>
 {{ end }}

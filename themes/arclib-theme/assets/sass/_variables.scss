@@ -1,0 +1,51 @@
+:root {
+    --color-hr: var(--white-700);
+
+    --color-bg: white;
+    --color-text: var(--gray-900);
+
+    --color-footer-bg: var(--white-600);
+
+    --color-search-bg: var(--white-600);
+    --color-search-focus-outline: var(--orange-500);
+    --color-kbd-text: var(--white-900);
+    --color-kbd-border: var(--white-800);
+
+    --color-button-normal-bg: var(--white-700);
+    --color-button-mute-bg: var(--white-700);
+    --color-button-highlight-bg: var(--blue-500);
+
+    --color-dropdown-bg: var(--white-700);
+    --color-dropdown-divider: var(--white-800);
+    --color-dropdown-hover: var(--white-600);
+
+    --color-sidebar-item-bg: var(--white-600);
+
+    --color-section-card-bg: var(--white-600);
+}
+
+html.dark {
+    --color-hr: var(--gray-200);
+
+    --color-bg: var(--gray-500);
+    --color-text: white;
+
+    --color-footer-bg: var(--gray-400);
+
+    --color-search-bg: var(--gray-300);
+    --color-search-focus-outline: var(--orange-500);
+    --color-kbd-text: var(--gray-50);
+    --color-kbd-border: var(--gray-100);
+    
+    --color-button-normal-bg: var(--gray-300);
+    --color-button-mute-bg: var(--white-700);
+    --color-button-highlight-bg: var(--blue-500);
+
+    --color-dropdown-bg: var(--gray-300);
+    --color-dropdown-divider: var(--gray-100);
+    --color-dropdown-hover: var(--gray-200);
+
+    --color-sidebar-item-bg: var(--gray-400);
+
+    --color-section-card-bg: var(--gray-400);
+}

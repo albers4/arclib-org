@@ -1,0 +1,51 @@
+button.arclib-button {
+    background-color: var(--blue-500);
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 40px;
+    cursor: pointer;
+
+    outline: none;
+    border: none;
+}
+.arclib-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border-radius: 40px;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid transparent;
+    font-size: 14px;
+
+    &-icon {
+        display: flex;
+        align-items: center;
+    }
+
+    &-normal {
+        background-color: var(--color-button-normal-bg);
+        color: var(--color-text);
+    }
+
+    &-mute {
+        background-color: transparent;
+        opacity: 0.6;
+        color: var(--color-text);
+
+        &-active {
+            opacity: 1;
+        }
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+    
+    &-highlight {
+        background-color: var(--color-button-highlight-bg);
+        color: white;
+    }
+}
