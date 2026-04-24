@@ -1,8 +1,47 @@
 {{ define "main" }}
 <main class="arclib-home">
-    <h1>{{ .Title }}</h1>
-    <h3>{{ .Summary }}</h3>
-    {{- partial "utils/button.html" (dict "text" "Getting started" "href" "/docs/getting-started" "variant" "highlight") -}}
-    <h4>{{ .ContentWithoutSummary }}</h4>
+    <span class="arclib-home-header">
+        <h1>{{ .Title }}</h1>
+        <h3>{{ .Summary }}</h3>
+        {{- partial "utils/button.html" (dict "text" "Getting started" "href" "/docs/getting-started" "variant" "highlight") -}}
+        <h4 class="arclib-home-description">{{ .ContentWithoutSummary }}</h4>
+    </span>
+
+    <div class="arclib-home-grid">
+        <article class="arclib-home-card arclib-home-card-featured">
+            <div class="arclib-home-card-image">
+                <img src="{{ `images/example1.webp` | relURL }}" alt="">
+            </div>
+            <div class="arclib-home-card-meta">
+                <span class="arclib-home-card-category">Post</span>
+            </div>
+            <a href="">
+                <h2 class="arclib-home-card-title">Simulation</h2>
+            </a>
+            <div class="arclib-home-card-summary">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+        </article>
+        <article class="arclib-home-card">
+            <div class="arclib-home-card-image">
+                <img src="{{ `images/example2.webp` | relURL }}" alt="">
+            </div>
+            <div class="arclib-home-card-meta">
+                <span class="arclib-home-card-category">Post</span>
+            </div>
+            <a href="">
+                <h2 class="arclib-home-card-title">Simulation</h2>
+            </a>
+        </article>
+        <article class="arclib-home-card">
+            <div class="arclib-home-card-image">
+                <img src="{{ `images/example3.webp` | relURL }}" alt="">
+            </div>
+            <div class="arclib-home-card-meta">
+                <span class="arclib-home-card-category">Post</span>
+            </div>
+            <a href="">
+                <h2 class="arclib-home-card-title">Simulation</h2>
+            </a>
+        </article>
+    </div>
 </main>
 {{ end }}

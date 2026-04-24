@@ -1,11 +1,91 @@
 main.arclib-home {
-    text-align: center;
+    min-height: 100vh;
+    max-width: 90rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10rem;
 
-    > h1 {
-        margin-top: 8rem;
-    }
+}
+
+.arclib-home-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8rem;
+    margin-bottom: 20rem;
 
     > h4 {
-        margin-top: 5rem;
+        margin-top: 3rem;
+    }
+}
+
+.arclib-home-description {
+    width: 40rem;
+    margin: 0 auto;
+}
+
+.arclib-home-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem 1.5rem;
+
+    .arclib-home-card-featured {
+        grid-column: span 2;
+        grid-row: span 2;
+
+        .arclib-home-card-title {
+            font-size: 2.5rem;
+        }
+        .arclib-home-card-image { aspect-ratio: 16 / 10; }
+    }
+
+    &-show {
+        display: grid;
+    }
+}
+
+.arclib-home-card {
+    a { 
+        text-decoration: none; 
+        color: inherit; 
+        display: block; 
+    }
+
+    &-image {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        background-color: var(--color-section-card-bg);
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 1.25rem;
+        img { width: 100%; height: 100%; object-fit: cover; }
+    }
+
+    &-meta {
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        gap: 0.75rem;
+        font-weight: 400;
+        opacity: .6;
+    }
+
+    &-title {
+        font-size: 2rem;
+        font-family: "Inter";
+        line-height: 1.1;
+        margin: 0;
+        letter-spacing: -0.02em;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &-summary {
+        font-size: 1rem;
+        line-height: 1.4;
+        margin-top: 1rem;
+        opacity: 0.8;
     }
 }
