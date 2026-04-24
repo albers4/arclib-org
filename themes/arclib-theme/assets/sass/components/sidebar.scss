@@ -20,8 +20,10 @@
     flex: 1;
     overflow-y: auto;
     scrollbar-width: thin;
+    direction: rtl;
 
     ul {
+        direction: ltr;
         display: flex;
         flex-direction: column;
         gap: .2rem;
