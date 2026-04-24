@@ -1,8 +1,4 @@
 ---
 title: "Benchmarks"
-weight: 20
+weight: 92
 ---
-
-## Fluid Dynamics
-## Solid Mechanics
-## Electromagnetisme
