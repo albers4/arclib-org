@@ -1,0 +1,7 @@
+{{- $flexSearchVersion := "0.8.143" -}}
+{{- $flexSearchUrl := printf "https://cdn.jsdelivr.net/npm/flexsearch@%s/dist/flexsearch.bundle.min.js" $flexSearchVersion -}}
+
+{{- with resources.GetRemote $flexSearchUrl -}}
+  {{- $flexSearchJs := . | fingerprint -}}
+  <script defer src="{{ $flexSearchJs.RelPermalink }}" integrity="{{ $flexSearchJs.Data.Integrity }}" crossorigin="anonymous"></script>
+{{- end -}}

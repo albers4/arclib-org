@@ -6,7 +6,9 @@
     {{- $currentPage := . -}}
     {{- range site.Menus.main -}}
       {{- if eq .Params.type "search" -}}
-        {{- partial "search.html" . -}}
+        {{- if ne $currentPage.Section "docs" -}}
+          {{- partial "search.html" (dict "alignment" "right") -}}
+        {{- end -}}
       {{- else -}}
         {{- $link := .URL -}}
         {{- $external := strings.HasPrefix $link "http" -}}

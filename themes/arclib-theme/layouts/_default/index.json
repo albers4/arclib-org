@@ -1,0 +1,18 @@
+{{- $index := slice -}}
+{{- range .Site.AllPages -}}
+    {{- if not .Params.noshow -}}
+        {{- $content := .Plain | plainify | safeJS -}}
+        
+        {{- $path := split (strings.Trim .RelPermalink "/") "/" -}}
+        {{- $breadcrumb := delimit $path " > " -}}
+
+        {{- $index = $index | append (dict
+            "url" .RelPermalink
+            "title" .Title
+            "section" .Section
+            "content" $content
+            "breadcrumb" $breadcrumb
+        ) -}}
+    {{- end -}}
+{{- end -}}
+{{- $index | jsonify -}}

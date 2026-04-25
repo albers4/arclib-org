@@ -3,6 +3,12 @@ locale: "en-us"
 title: "ARC | Applied Research & Computation"
 theme: "arclib-theme"
 
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
 params:
   banner:
     message: |

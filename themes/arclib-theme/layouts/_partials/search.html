@@ -1,6 +1,8 @@
+{{- $alignment := .alignment -}}
 <div class="arclib-search-wrapper">
-    <div>
+    <div class="arclib-search-container">
         <input
+            class="arclib-search-input"
             placeholder="Search..."
             type="search"
             autocomplete="off"
@@ -8,4 +10,5 @@
             spellcheck="false"/>
         <kbd>CTRL K</kbd>
     </div>
+    <ul class="arclib-search-results-hidden arclib-search-results {{ if eq $alignment "right" }}arclib-search-results-right{{ else }}arclib-search-results-left{{ end }}"></ul>
 </div>

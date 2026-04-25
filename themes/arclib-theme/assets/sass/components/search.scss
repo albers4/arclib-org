@@ -15,29 +15,83 @@ input::-ms-reveal {
 
 .arclib-search-wrapper {
     position: relative;
+}
 
-    > div {
-        position: relative;
+.arclib-search-container {
+    position: relative;
+    display: flex;
+    place-items: center;
+    height: 100%;
+}
+
+.arclib-search-input {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    border-radius: 8px;
+    padding-left: 10px;
+    padding-right: 55px;
+    outline: none;
+    border: none;
+    height: 2rem;
+    background-color: var(--color-search-bg);
+
+    &:focus {
+        background-color: var(--color-bg);
+        outline: 2px solid var(--color-search-focus-outline);
+    }
+}
+
+.arclib-search-results {
+    z-index: 100;
+    background-color: var(--color-search-results-bg);
+    border-radius: 8px;
+    position: absolute;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    max-height: 20rem;
+    top: calc(100% + .5rem);
+    width: 40rem;
+    list-style: none;
+
+    &-hidden {
+        display: none;
+    }
+
+    &-left {
+        left: 0;
+    }
+
+    &-right {
+        right: 0;
+    }
+
+    &-item {
         display: flex;
-        place-items: center;
+        flex-direction: column;
+        border-bottom: 1px solid var(--color-hr);
+        padding: 1rem 2rem;
 
-        > input[type="search"] {
-            display: block;
-            width: 100%;
-            font-size: 14px;
-            border-radius: 8px;
-            padding-left: 10px;
-            padding-right: 55px;
-            outline: none;
-            border: none;
-            height: 2rem;
-            background-color: var(--color-search-bg);
+        &-breadcrumb {
+            font-size: 12px;
+            opacity: .5;
+        }
 
+        &-title {
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            margin: 0.25rem 0;
 
-            &:focus {
-                background-color: var(--color-bg);
-                outline: 2px solid var(--color-search-focus-outline);
+            &:hover {
+                text-decoration: underline;
             }
+        }
+
+        &-excerpt {
+            font-size: 12px;
+            opacity: .5;
         }
     }
 }

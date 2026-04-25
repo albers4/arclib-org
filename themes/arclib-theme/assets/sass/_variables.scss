@@ -1,5 +1,5 @@
 :root {
-    --color-hr: var(--white-700);
+    --color-hr: var(--white-800);
 
     --color-bg: white;
     --color-text: var(--gray-900);
@@ -22,6 +22,8 @@
     --color-sidebar-item-bg: var(--white-600);
 
     --color-section-card-bg: var(--white-600);
+
+    --color-search-results-bg: var(--white-700);
 }
 
 html.dark {
@@ -48,4 +50,6 @@ html.dark {
     --color-sidebar-item-bg: var(--gray-400);
 
     --color-section-card-bg: var(--gray-400);
+
+    --color-search-results-bg: var(--gray-300);
 }
