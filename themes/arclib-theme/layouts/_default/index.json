@@ -4,7 +4,7 @@
         {{- $content := .Plain | plainify | safeJS -}}
         
         {{- $path := split (strings.Trim .RelPermalink "/") "/" -}}
-        {{- $breadcrumb := delimit $path " > " -}}
+        {{- $breadcrumb := delimit $path " / " -}}
 
         {{- $index = $index | append (dict
             "url" .RelPermalink
