@@ -1,4 +1,4 @@
 ---
-title: "NURBS"
+title: "Lattice"
 weight: 35
 ---

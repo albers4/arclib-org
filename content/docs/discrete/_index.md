@@ -1,4 +1,4 @@
 ---
-title: "Grid"
+title: "Discrete"
 weight: 34
 ---
