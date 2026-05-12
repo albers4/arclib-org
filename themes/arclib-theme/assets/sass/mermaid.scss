@@ -1,0 +1,27 @@
+.mermaid {
+    svg {
+        background-color: var(--color-bg) !important;
+    }
+
+    .node {
+        rect, polygon, circle, .label-container {
+            fill: var(--color-bg) !important;
+            stroke: var(--color-text) !important;
+        }
+
+        .label, span, div {
+            color: var(--color-text) !important;
+            fill: var(--color-text) !important;
+        }
+    }
+
+    .edgePaths path {
+        stroke: var(--color-text) !important;
+        fill: none !important;
+    }
+
+    marker {
+        fill: var(--color-text) !important;
+        stroke: var(--color-text) !important;
+    }
+}

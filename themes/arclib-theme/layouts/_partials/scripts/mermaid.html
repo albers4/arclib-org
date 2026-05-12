@@ -1,0 +1,13 @@
+{{- $mermaidUrl := printf "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js" -}}
+{{- with resources.GetRemote $mermaidUrl -}}
+    {{- $mermaidJs := . | fingerprint -}}
+    <script>
+        function initMermaid() {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: "base",
+            });
+        }
+    </script>
+    <script src="{{ $mermaidJs.RelPermalink }}" integrity="{{ $mermaidJs.Data.Integrity }}" crossorigin="anonymous" onload="initMermaid()"></script>
+{{- end -}}
