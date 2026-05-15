@@ -44,6 +44,23 @@ menu:
       url: "https://github.com/albers4"
       weight: 3
 
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: true
+
+languages:
+  en:
+    contentDir: content/en
+    languageName: "English"
+    weight: 1
+    params:
+      language-Code: "en-US"
+  de:
+    contentDir: content/de
+    languageName: "German"
+    weight: 2
+    params:
+      language-Code: "de-DE"
+
 markup:
   goldmark:
     extensions:

@@ -1,7 +1,22 @@
+{{- $currentLanguage := .Language.LanguageName -}}
+{{- $items := slice -}}
+{{- range .Translations -}}
+    {{- $items = $items | append (dict
+            "text" .Language.LanguageName
+            "action" (printf "changeLanguage('%s')" .Permalink)
+        ) 
+    -}}
+{{- end -}}
+
 <footer>
     <div class="arclib-footer-wrapper">
-        <div class="arclib-footer-lang-theme">
-            {{- partial "utils/button.html" (dict "text" "English" "iconLeft" "globe-alt") -}}
+        <div class="arclib-footer-lang-theme" id="arclib-language-selector">
+            {{- partial "utils/dropdown.html" (dict
+                    "align" "left" 
+                    "trigger" (dict "text" $currentLanguage "iconLeft" "globe-alt")
+                    "items" $items
+                )
+            -}}
             {{- partial "utils/button.html" (dict "id" "arclib-theme-toggle" "iconLeft" "sun" "iconRight" "moon") -}}
         </div>
     </div>

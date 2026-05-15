@@ -3,7 +3,7 @@
     <span class="arclib-home-header">
         <h1>{{ .Title }}</h1>
         <h3>{{ .Summary }}</h3>
-        {{- partial "utils/button.html" (dict "text" "Getting started" "href" "/docs/getting-started" "variant" "highlight") -}}
+        {{- partial "utils/button.html" (dict "text" (T "getting_started") "href" "/docs/getting-started" "variant" "highlight") -}}
         <h4 class="arclib-home-description">{{ .ContentWithoutSummary }}</h4>
     </span>
 
