@@ -24,28 +24,28 @@
     <div class="arclib-footer-wrapper">
         <div class="arclib-footer-links">
             <div class="arclib-footer-list">
-                <div class="arclib-footer-headline">List 1</div>
-                <a href="/" class="arclib-footer-item">Item 1</a>
-                <a class="arclib-footer-item">Item 2</a>
+                <div class="arclib-footer-headline">Copyright (c) 2026<br>ARC (Applied Research & Computation)<br>All rights reserved.</div>
 
-                <div class="arclib-footer-headline">List 2</div>
-                <a class="arclib-footer-item">Item 1</a>
-                <a class="arclib-footer-item">Item 2</a>
+                <div class="arclib-footer-headline">Resources</div>
+                <a href="https://github.com/albers4" rel="noopener norefferer" target="_blank" class="arclib-footer-item">GitHub</a>
+                <a href="https://github.com/albers4" rel="noopener norefferer" target="_blank" class="arclib-footer-item">Community</a>
             </div>
             <div class="arclib-footer-list">
-                <div class="arclib-footer-headline">List 1</div>
-                <a class="arclib-footer-item">Item 1</a>
-                <a class="arclib-footer-item">Item 2</a>
+                <div class="arclib-footer-headline">Blog</div>
+                {{ $p := .Site.GetPage "blog/introduction" }}
+                <a href="{{ $p.RelPermalink }}" class="arclib-footer-item">{{ $p.Title }}</a>
+                {{ $p := .Site.GetPage "blog/ded-simulation" }}
+                <a href="{{ $p.RelPermalink }}" class="arclib-footer-item">{{ $p.Title }}</a>
             </div>
             <div class="arclib-footer-list">
-                <div class="arclib-footer-headline">List 1</div>
-                <a class="arclib-footer-item">Item 1</a>
-                <a class="arclib-footer-item">Item 2</a>
+                <div class="arclib-footer-headline">Stories</div>
+                {{ $p := .Site.GetPage "stories/introduction" }}
+                <a href="{{ $p.RelPermalink }}" class="arclib-footer-item">{{ $p.Title }}</a>
             </div>
             <div class="arclib-footer-list">
-                <div class="arclib-footer-headline">List 1</div>
-                <a class="arclib-footer-item">Item 1</a>
-                <a class="arclib-footer-item">Item 2</a>
+                <div class="arclib-footer-headline">Documentation</div>
+                {{ $p := .Site.GetPage "docs/getting-started" }}
+                <a href="{{ $p.RelPermalink }}" class="arclib-footer-item">{{ $p.Title }}</a>
             </div>
         </div>
     </div>
