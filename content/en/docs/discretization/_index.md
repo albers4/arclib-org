@@ -1,6 +1,6 @@
 ---
-title: "Numerics"
+title: "Discretization"
 sidebar:
     seperator: true
-weight: 200
+weight: 400
 ---

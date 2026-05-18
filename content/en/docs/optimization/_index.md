@@ -1,6 +1,6 @@
 ---
-title: "Numerics"
+title: "Optimization"
 sidebar:
     seperator: true
-weight: 200
+weight: 700
 ---

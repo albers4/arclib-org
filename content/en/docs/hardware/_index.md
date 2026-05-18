@@ -1,6 +1,6 @@
 ---
-title: "Numerics"
+title: "Hardware"
 sidebar:
     seperator: true
-weight: 200
+weight: 800
 ---

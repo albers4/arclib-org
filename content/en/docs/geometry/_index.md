@@ -1,6 +1,6 @@
 ---
-title: "Numerics"
+title: "Geometry"
 sidebar:
     seperator: true
-weight: 200
+weight: 300
 ---

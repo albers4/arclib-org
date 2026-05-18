@@ -1,6 +1,6 @@
 ---
-title: "Numerics"
+title: "Physics"
 sidebar:
     seperator: true
-weight: 200
+weight: 500
 ---
