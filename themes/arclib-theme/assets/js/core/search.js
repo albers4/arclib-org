@@ -14,7 +14,10 @@
             }
         });
 
-        const data = await (await fetch("/index.json")).json();
+        const rawLang = document.documentElement.lang || window.location.pathname.split("/")[1] || "en";
+        const lang = rawLang.toLowerCase().split("-")[0];
+        const path = `/${lang}/index.json`;
+        const data = await (await fetch(path)).json();
         data.forEach(item => index.add(item));
     }
 
